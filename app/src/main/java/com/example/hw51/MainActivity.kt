@@ -1,6 +1,7 @@
 package com.example.hw51
 
 import android.annotation.SuppressLint
+import android.graphics.Color
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
@@ -12,7 +13,7 @@ import com.example.hw51.presenter.Presenter
 class MainActivity : AppCompatActivity(),CounterView {
 
     private lateinit var binding: ActivityMainBinding
-    private var presenter = Presenter()
+    private var presenter = Presenter(this)
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -28,12 +29,6 @@ class MainActivity : AppCompatActivity(),CounterView {
         with(binding){
             btnPlus.setOnClickListener {
                 presenter.increment()
-                if(tvResult.text.equals("10")){
-                    Toast.makeText(this@MainActivity,"Congratulations",Toast.LENGTH_SHORT).show()
-                }
-                if(tvResult.text.equals("15")){
-                    tvResult.setTextColor(R.color.green)
-                }
             }
             btnMinus.setOnClickListener {
                 presenter.decrement()
@@ -44,4 +39,14 @@ class MainActivity : AppCompatActivity(),CounterView {
     override fun updateCount(count: Int) {
         binding.tvResult.text = count.toString()
     }
+
+    override fun showToast() {
+        Toast.makeText(this, "Congratulations", Toast.LENGTH_SHORT).show()
+    }
+
+    override fun setColor() {
+        binding.tvResult.setBackgroundColor(Color.GREEN)
+    }
+
+
 }

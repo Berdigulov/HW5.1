@@ -12,4 +12,10 @@ class CounterModel {
     fun decrement(){
         --count
     }
+
+    @JvmName("getCount1")
+    fun getCount():Int{
+        return count
+
+    }
 }
